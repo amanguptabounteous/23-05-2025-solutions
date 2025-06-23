@@ -1,0 +1,29 @@
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-6">
+  <div *ngFor="let product of products$ | async" class="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between">
+    
+    <!-- Product Image -->
+    <img [src]="product.imageUrl" alt="{{ product.name }}" class="mb-4 rounded w-full h-48 object-cover" />
+
+    <div>
+      <!-- Product Name -->
+      <h2 class="text-lg font-semibold mb-2">{{ product.name }}</h2>
+
+      <!-- Product Description -->
+      <p class="text-gray-600 mb-2">{{ product.description }}</p>
+
+      <!-- Product Price -->
+      <p class="text-gray-800 font-medium mb-2">Price: ₹{{ product.price }}</p>
+
+      <!-- Product Stock -->
+      <p class="text-gray-800 font-medium mb-4">Stock: {{ product.stock }}</p>
+    </div>
+
+    <!-- Add to Cart Button -->
+    <button 
+      (click)="addToCart(product)" 
+      [disabled]="product.stock === 0" 
+      class="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white px-4 py-2 rounded transition">
+      {{ product.stock === 0 ? 'Out of Stock' : 'Add to Cart' }}
+    </button>
+  </div>
+</div>

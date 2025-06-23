@@ -1,0 +1,28 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+
+  <div *ngIf="(cartItems$ | async)?.length === 0" class="text-gray-500">Your cart is empty.</div>
+
+  <div *ngFor="let item of cartItems$ | async" class="bg-white p-4 rounded shadow mb-4 flex justify-between items-center">
+    <div>
+      <h3 class="text-lg font-semibold">{{ item.name }}</h3>
+      <p class="text-gray-600">{{ item.description }}</p>
+      <p class="text-gray-700 font-medium">Price: ₹{{ item.price }}</p>
+      <p class="text-gray-700 font-medium">Quantity: {{ item.quantity }}</p>
+      <p class="text-gray-700 font-medium">Subtotal: ₹{{ item.price * item.quantity }}</p>
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <button (click)="increase(item.id)" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded">+</button>
+      <button (click)="decrease(item.id)" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded">-</button>
+      <button (click)="remove(item.id)" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Remove</button>
+    </div>
+  </div>
+
+  <!-- Cart Total -->
+ <div class="mt-6 text-lg font-bold">
+  Continue to checkout - Your total sum is {{ cartTotal$ | async }} Rs
+</div>
+
+
+</div>
